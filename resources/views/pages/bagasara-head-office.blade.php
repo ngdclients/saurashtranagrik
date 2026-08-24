@@ -4,36 +4,23 @@
 @section('meta', 'Bagasara Head Office of Shree Saurashtra Nagrik Sharafi Sahakari Mandali Ltd. - Board of Directors, address and contact details.')
 
 @php
-    $officers = [
-        ['Chairman',      'Shri Anilbhai G. Vekariya'],
-        ['Vice Chairman', 'Shri Diveyshbhai M. Vekariya'],
-        ['M.D. Shri',     'Shri Jayasukhbhai S. Gondaliya'],
-        ['Mantri Shri',   'Shri Rupalben D. Sarvaiya'],
-    ];
-
     $members = [
         'Shri Dipakbhai V. Ambaliya',
-        'Shri Bhaveshbhai L. Traapasiya',
+        'Shri Bhaveshbhai L. Trapasiya',
         'Shri Bhavanaben V. Satasiya',
         'Shri Pravinbhai J. Kasawala',
-        'Shri Hiteshbhai R. Tereya',
+        'Shri Hiteshbhai R. Teraiya',
         'Shri Arunaben P. Babariya',
         'Shri Amitabhai M. Khimsuriya',
     ];
 
-    $initials = function (string $name): string {
-        $clean = $name;
-        for ($i = 0; $i < 2; $i++) {
-            $clean = preg_replace('/^\s*(shri|smt|dr|ad|mr|mrs)\.?\s*/i', '', $clean);
-        }
-        $parts = preg_split('/\s+/', trim($clean), -1, PREG_SPLIT_NO_EMPTY) ?: [];
-        if (! $parts) {
-            return '?';
-        }
-        $first = $parts[0];
-        $last = count($parts) > 1 ? $parts[count($parts) - 1] : '';
-        return mb_strtoupper(mb_substr($first, 0, 1) . mb_substr($last, 0, 1));
-    };
+    // Directors split by sort_order position (as set in admin panel):
+    // 1st  → Chairman   (centred hero row)
+    // 2–4  → Vice Chairman / M.D. / Mantri  (3-col row)
+    // 5+   → any additional directors
+    $dirChairman = $directors->first();
+    $dirTier2    = $directors->slice(1, 3)->values();
+    $dirRest     = $directors->slice(4)->values();
 @endphp
 
 @section('content')
@@ -63,21 +50,87 @@
         </div>
     </div>
 
-    {{-- Head office staff: officers + members merged --}}
-    <section class="section section--tight section--subtle">
+    {{-- Board of Directors --}}
+    <section class="section section--tight" style="background:linear-gradient(155deg,color-mix(in srgb,var(--brand) 4%,var(--surface)),color-mix(in srgb,var(--gold) 7%,var(--surface)) 100%)">
         <div class="wrap">
-            <div class="section-head reveal">
+
+            {{-- Heading --}}
+            <div class="section-head reveal" style="text-align:center">
                 <h2>Board of Directors</h2>
+                <div style="width:48px;height:3px;background:linear-gradient(90deg,var(--brand),var(--gold));border-radius:2px;margin:.4rem auto 0"></div>
             </div>
+
+            {{-- Row 1: Chairman – centred, badge floating above --}}
+            @if ($dirChairman)
+                <div class="reveal" style="display:flex;justify-content:center;margin-bottom:3.5rem">
+                    <div style="position:relative;width:300px">
+                        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;background:linear-gradient(135deg,var(--brand),var(--gold));color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 20px;border-radius:var(--radius-full);box-shadow:var(--shadow-sm)">
+                            ★&nbsp; {{ $dirChairman->designation }}
+                        </div>
+                        <article class="card card--hover person" style="border-top:3px solid var(--brand)">
+                            <div class="person-photo">
+                                <img src="{{ asset($dirChairman->photo) }}" alt="{{ $dirChairman->name }}"
+                                     loading="lazy" decoding="async">
+                            </div>
+                            <div class="card-body">
+                                <h3>{{ $dirChairman->name }}</h3>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            @endif
+
+            {{-- Row 2: Vice Chairman / M.D. / Mantri – floating designation badges --}}
+            @if ($dirTier2->isNotEmpty())
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;max-width:780px;margin:0 auto 3.5rem" class="reveal-group">
+                    @foreach ($dirTier2 as $d)
+                        <div style="position:relative">
+                            <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;background:var(--brand-soft);color:var(--brand);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;border-radius:var(--radius-full);border:1.5px solid var(--brand)">
+                                {{ $d->designation }}
+                            </div>
+                            <article class="card card--hover person" style="border-top:2px solid var(--brand)">
+                                <div class="person-photo">
+                                    <img src="{{ asset($d->photo) }}" alt="{{ $d->name }}"
+                                         loading="lazy" decoding="async">
+                                </div>
+                                <div class="card-body">
+                                    <h3>{{ $d->name }}</h3>
+                                </div>
+                            </article>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            {{-- Row 3: any extra directors (5th+) --}}
+            @if ($dirRest->isNotEmpty())
+                <div class="grid grid--4 reveal-group" style="margin-bottom:3rem">
+                    @foreach ($dirRest as $d)
+                        <article class="card card--hover person">
+                            <div class="person-photo">
+                                <img src="{{ asset($d->photo) }}" alt="{{ $d->name }}"
+                                     loading="lazy" decoding="async">
+                            </div>
+                            <div class="card-body">
+                                <h3>{{ $d->name }}</h3>
+                                <span class="role">{{ $d->designation }}</span>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            @endif
+
+            {{-- Members divider --}}
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:2rem" class="reveal">
+                <div style="flex:1;height:1px;background:var(--border)"></div>
+                <span style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);padding:0 4px">Members</span>
+                <div style="flex:1;height:1px;background:var(--border)"></div>
+            </div>
+
+            {{-- Member lead-cards --}}
             <div class="lead-grid reveal-group">
-                @foreach ($officers as $i => [$role, $name])
-                    <article class="lead-card" style="--accent: var(--c{{ ($i % 6) + 1 }})">
-                        <span class="lead-card__role">{{ $role }}</span>
-                        <h3 class="lead-card__name">{{ $name }}</h3>
-                    </article>
-                @endforeach
                 @foreach ($members as $i => $name)
-                    <article class="lead-card" style="--accent: var(--c{{ (($i + count($officers)) % 6) + 1 }})">
+                    <article class="lead-card" style="--accent: var(--c{{ ($i % 6) + 1 }})">
                         <h3 class="lead-card__name">{{ $name }}</h3>
                     </article>
                 @endforeach
@@ -97,7 +150,6 @@
                     ['Financial Manager',   'Shri Chiragbhai Kanpariya'],
                     ['Development Manager', 'Shri Alpeshbhai Sathwara'],
                     ['Account Manager',     'Shri Ajaybhai Nakum'],
-                    ['Branch Manager',      'Shri Ghanshayambhai Mitaliya'],
                 ] as $i => [$role, $name])
                     <article class="lead-card" style="--accent: var(--c{{ ($i % 6) + 1 }})">
                         <span class="lead-card__role">{{ $role }}</span>

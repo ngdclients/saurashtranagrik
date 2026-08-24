@@ -62,7 +62,10 @@ foreach ($pages as $page) {
 }
 
 // Static Bagasara Head Office page - declared before {branch} so it matches first
-Route::get('/branches/bagasara-head-office', fn () => view('pages.bagasara-head-office'))->name('branches.bagasara-head-office');
+Route::get('/branches/bagasara-head-office', function () {
+    $directors = \App\Models\Director::published()->get();
+    return view('pages.bagasara-head-office', compact('directors'));
+})->name('branches.bagasara-head-office');
 
 // Legacy: /branches/4 → /branches/chuda (permanent redirect)
 Route::get('/branches/{id}', function ($id) {

@@ -17,19 +17,24 @@
                 <a class="brand" href="{{ route('home') }}" style="margin-bottom:16px">
                     <img src="{{ asset('images/logo-lg.png') }}" width="46" height="46" alt="" loading="lazy">
                     <span class="brand-text">
-                        <b>Shree Saurashtra Nagrik</b>
+                        <b>Shri Saurashtra Nagrik Sharafi Sahkari Mandali</b>
                         <span>Sharafi Sahakari Mandali Ltd.</span>
                     </span>
                 </a>
-                <p>Serving members across Bagasara, Kunkavav, Bhesan, Chuda, Visavadar, Bhalgam, Amreli, Dhari, Ahmedabad, Junagadh and Mendarda.</p>
+                <p>Samarth Saurashtra Building,
+Amarpara, Bagasara, Dist. - Amreli
+Bagasara, Gujarat 365601
+India.</p>
 
                 <ul class="footer-contact">
-                    <li>
-                        <a href="mailto:{{ config('site.contact.email') }}" target="_blank" rel="noopener">
-                            @include('partials.icon', ['name' => 'mail'])
-                            {{ config('site.contact.email') }}
-                        </a>
-                    </li>
+        @foreach(config('site.contact.emails') as $email)
+    <li>
+        <a href="mailto:{{ $email }}">
+            @include('partials.icon', ['name' => 'mail'])
+            {{ $email }}
+        </a>
+    </li>
+@endforeach
                     <li>
                         <a href="tel:{{ preg_replace('/\D+/', '', config('site.contact.phone')) }}" target="_blank" rel="noopener">
                             @include('partials.icon', ['name' => 'phone'])

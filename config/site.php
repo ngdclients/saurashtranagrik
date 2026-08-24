@@ -145,11 +145,14 @@ return [
     ],
 
     'contact' => [
-        'email' => 'snssml005@gmail.com',
+         'emails' => [
+        'snssml005@gmail.com',
+        'info@saurashtranagrik.com',
+    ],
         'phone' => '+91-9327201086',
         'social' => [
             'instagram' => 'https://www.instagram.com/saurashtra_mandali_bagasara/',
-            'facebook' => 'https://www.facebook.com/SaurashtraNagarikSharafiSahkariMandali',
+            'facebook' => 'https://www.facebook.com/profile.php?id=61593558693497',
         ],
     ],
 
