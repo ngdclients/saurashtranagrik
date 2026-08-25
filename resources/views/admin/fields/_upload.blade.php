@@ -24,7 +24,9 @@
     @if ($current)
         <div id="{{ $previewId }}_current" class="checkline {{ $isSmall ? 'checkline-small' : '' }}" style="margin-top:{{ $isSmall ? '5px' : '8px' }}">
             @if ($isImage)
-                <img class="thumb {{ $isSmall ? 'thumb-small' : '' }}" src="{{ asset($current) }}" alt="Current image">
+                <img class="thumb {{ $isSmall ? 'thumb-small' : '' }}"
+                     src="{{ asset($current) }}" alt="Current image"
+                     style="{{ $isSmall ? 'width:38px;height:28px' : 'width:80px;height:60px' }};object-fit:cover;border-radius:4px;flex-shrink:0">
             @endif
             <span class="muted small">
                 Current: <a href="{{ asset($current) }}" target="_blank" rel="noopener">{{ basename($current) }}</a>
