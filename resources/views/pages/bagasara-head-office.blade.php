@@ -97,19 +97,25 @@
                 </div>
             @endif
 
-            {{-- Row 3: any extra directors (5th+) --}}
+            {{-- Row 3: any extra directors (5th+) – floating badge at top, same as Tier 2 --}}
             @if ($dirRest->isNotEmpty())
-                <div class="grid-cards-center reveal-group">
+                <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2rem 1.5rem;max-width:960px;margin:0 auto 1rem"
+                    class="reveal-group">
                     @foreach ($dirRest as $d)
-                        <article class="card card--hover person">
-                            <div class="person-photo">
-                                <img src="{{ asset($d->photo) }}" alt="{{ $d->name }}" loading="lazy" decoding="async">
+                        <div style="position:relative;width:190px;flex-shrink:0">
+                            <div
+                                style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;background:var(--brand-soft);color:var(--brand);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;border-radius:var(--radius-full);border:1.5px solid var(--brand)">
+                                {{ $d->designation }}
                             </div>
-                            <div class="card-body">
-                                <h3>{{ $d->name }}</h3>
-                                <span class="role">{{ $d->designation }}</span>
-                            </div>
-                        </article>
+                            <article class="card card--hover person" style="border-top:2px solid var(--brand)">
+                                <div class="person-photo">
+                                    <img src="{{ asset($d->photo) }}" alt="{{ $d->name }}" loading="lazy" decoding="async">
+                                </div>
+                                <div class="card-body">
+                                    <h3>{{ $d->name }}</h3>
+                                </div>
+                            </article>
+                        </div>
                     @endforeach
                 </div>
             @endif
