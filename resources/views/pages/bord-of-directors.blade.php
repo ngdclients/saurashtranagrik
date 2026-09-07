@@ -42,7 +42,7 @@
 
     <section class="section">
         <div class="wrap">
-            <div class="grid grid--4 reveal-group">
+            <div class="grid-cards-center reveal-group">
                 @foreach ($directors as $director)
                     <article class="card card--hover person">
                         <div class="person-photo">

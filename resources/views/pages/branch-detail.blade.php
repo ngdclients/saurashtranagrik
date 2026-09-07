@@ -180,11 +180,12 @@
                     <span class="eyebrow">Branch board</span>
                     <h2>Advisory Board Members</h2>
                 </div>
-                <div class="card reveal">
+                @php $bmCount = count($signboard['board_members'] ?? []); @endphp
+                <div class="card reveal" @if($bmCount === 1) style="max-width:440px;margin-inline:auto" @elseif($bmCount === 2) style="max-width:760px;margin-inline:auto" @endif>
                     <div class="card-body">
                         <div class="roster-list">
                             @foreach ($signboard['board_members'] as $name)
-                                <div class="roster-person">
+                                <div class="roster-person" @if($bmCount === 1) style="flex:0 0 100%;max-width:100%" @endif>
                                     <span class="roster-avatar" aria-hidden="true">{{ $initials($name) }}</span>
                                     <span class="roster-person__text">
                                         <span class="roster-person__name">{{ $name }}</span>
@@ -220,11 +221,12 @@
                     <span class="eyebrow">Staff</span>
                     <h2>Supporting employees</h2>
                 </div>
-                <div class="card reveal">
+                @php $seCount = count($signboard['supporting_employees'] ?? []); @endphp
+                <div class="card reveal" @if($seCount === 1) style="max-width:440px;margin-inline:auto" @elseif($seCount === 2) style="max-width:760px;margin-inline:auto" @endif>
                     <div class="card-body">
                         <div class="roster-list">
                             @foreach ($signboard['supporting_employees'] as $name)
-                                <div class="roster-person">
+                                <div class="roster-person" @if($seCount === 1) style="flex:0 0 100%;max-width:100%" @endif>
                                     <span class="roster-avatar" aria-hidden="true">{{ $initials($name) }}</span>
                                     <span class="roster-person__text">
                                         <span class="roster-person__name">{{ $name }}</span>
@@ -269,11 +271,12 @@
                     <h2>Advisory Board Members</h2>
                     <p>{{ count($boardGroup['members']) }} members appointed at this branch.</p>
                 </div>
-                <div class="card reveal">
+                @php $bgCount = count($boardGroup['members'] ?? []); @endphp
+                <div class="card reveal" @if($bgCount === 1) style="max-width:440px;margin-inline:auto" @elseif($bgCount === 2) style="max-width:760px;margin-inline:auto" @endif>
                     <div class="card-body">
                         <div class="roster-list">
                             @foreach ($boardGroup['members'] as [$name, $role])
-                                <div @class(['roster-person', 'roster-person--lead' => str_contains(strtolower($role), 'md')])>
+                                <div @class(['roster-person', 'roster-person--lead' => str_contains(strtolower($role), 'md')]) @if($bgCount === 1) style="flex:0 0 100%;max-width:100%" @endif>
                                     <span class="roster-avatar" aria-hidden="true">{{ $initials($name) }}</span>
                                     <span class="roster-person__text">
                                         <span class="roster-person__name">{{ $name }}</span><br>
