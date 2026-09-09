@@ -29,7 +29,7 @@
             <a href="{{ route('admin.directors.index') }}" @class(['active' => request()->routeIs('admin.directors.*')])>Board of Directors</a>
             <a href="{{ route('admin.branches.index') }}" @class(['active' => request()->routeIs('admin.branches.*')])>Branches</a>
             <a href="{{ route('admin.branch-signboards.index') }}" @class(['active' => request()->routeIs('admin.branch-signboards.*')])>Branch Signboards</a>
-            <a href="{{ route('admin.managers.index') }}" @class(['active' => request()->routeIs('admin.managers.*')])>Managers</a>
+            {{-- <a href="{{ route('admin.managers.index') }}" @class(['active' => request()->routeIs('admin.managers.*')])>Managers</a> --}}
             <a href="{{ route('admin.downloads.index') }}" @class(['active' => request()->routeIs('admin.downloads.*')])>Downloads</a>
 
             <div class="group-label">Rates</div>

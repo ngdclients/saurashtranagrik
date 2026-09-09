@@ -18,7 +18,7 @@ return [
         'branches' => 'Branches',
         'loan' => 'Loans',
         'deposit' => 'Deposit',
-        'manager' => 'Managers',
+        // 'manager' => 'Managers',
         'downloads' => 'Downloads',
     ],
 
@@ -29,7 +29,7 @@ return [
             'branches' => 'Branches',
             'loan' => 'Loans',
             'deposit' => 'Deposit',
-            'manager' => 'Managers',
+            // 'manager' => 'Managers',
         ],
         'explore' => [
             'activity' => 'Activities',

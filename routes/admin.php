@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\DownloadController;
 use App\Http\Controllers\Admin\HeroSlideController;
 use App\Http\Controllers\Admin\HomeVideoController;
 use App\Http\Controllers\Admin\LoanController;
-use App\Http\Controllers\Admin\ManagerController;
+// use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\RecurringDepositController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,7 +49,7 @@ Route::middleware('auth:admin')->group(function () {
         'loans' => LoanController::class,
         'deposit-rates' => DepositRateController::class,
         'recurring-deposits' => RecurringDepositController::class,
-        'managers' => ManagerController::class,
+        // 'managers' => ManagerController::class,
         'downloads' => DownloadController::class,
     ];
 

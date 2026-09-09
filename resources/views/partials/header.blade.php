@@ -21,7 +21,7 @@
                                 {{-- <li class="{{ request()->routeIs('schemes') ? 'active' : '' }}"><a href="{{ route('schemes') }}">Schemes</a></li> --}}
                                 <li class="{{ request()->routeIs('loan') ? 'active' : '' }}"><a href="{{ route('loan') }}">Loans</a></li>
                                 <li class="{{ request()->routeIs('deposit') ? 'active' : '' }}"><a href="{{ route('deposit') }}">Deposit</a></li>
-                                <li class="{{ request()->routeIs('manager') ? 'active' : '' }}"><a href="{{ route('manager') }}">Managers</a></li>
+                                {{-- <li class="{{ request()->routeIs('manager') ? 'active' : '' }}"><a href="{{ route('manager') }}">Managers</a></li> --}}
                                 <li class="{{ request()->routeIs('downloads') ? 'active' : '' }}"><a href="{{ route('downloads') }}">Downloads</a></li>
                             </ul>
                         </div>

@@ -43,7 +43,7 @@ $pages = [
     'schemes',
     'loan',
     'deposit',
-    'manager',
+    // 'manager',
     'downloads',
     'activity',
     'progress-report',
