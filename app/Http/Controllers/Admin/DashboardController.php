@@ -25,7 +25,7 @@ class DashboardController extends Controller
         'loans' => ['Loans', Loan::class],
         'deposit-rates' => ['Deposit Rates', DepositRate::class],
         'recurring-deposits' => ['Recurring Deposits', RecurringDeposit::class],
-        'managers' => ['Managers', Manager::class],
+        // 'managers' => ['Managers', Manager::class],
         'downloads' => ['Downloads', Download::class],
     ];
 

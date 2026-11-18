@@ -24,11 +24,11 @@ class AuthController extends Controller
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'string'],
             'password' => ['required', 'string'],
         ]);
 
-        // Throttle by email + IP so the single admin account cannot be brute forced.
+        // Throttle by username + IP so the single admin account cannot be brute forced.
         $key = 'admin-login:'.strtolower($credentials['email']).'|'.$request->ip();
 
         if (RateLimiter::tooManyAttempts($key, 5)) {

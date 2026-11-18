@@ -36,8 +36,8 @@
         @endif
 
         <div class="field">
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username">
+            <label for="email">Username</label>
+            <input id="email" type="text" name="email" value="{{ old('email') }}" required autofocus autocomplete="username">
         </div>
 
         <div class="field">
